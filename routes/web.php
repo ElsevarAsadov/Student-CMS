@@ -32,6 +32,8 @@ Route::prefix('admin')->group(function(){
 
         Route::get('create', 'create')->name('teacher.create');
         Route::post('create', 'store')->name('teacher.post');
+
+        Route::delete('delete/{id:int}', 'delete');
     });
 
 

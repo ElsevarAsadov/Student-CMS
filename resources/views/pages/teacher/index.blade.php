@@ -3,11 +3,22 @@
 
 @php
     use App\Models\Teacher;
+    use App\Models\Course;
+
+
     /** @var Teacher $teacher  */
     /** @var Teacher[] $teachers  */
 
+    /**@var Course[] $courses  */
+    /**@var Course $course  */
+
 @endphp
 
+
+{{--@section('vite')--}}
+
+{{--@endsection--}}
+@vite(["resources/js/pages/teacher/index.js"])
 
 @section('content')
     <div class="container-xxl">
@@ -29,7 +40,17 @@
                     <td>{{$teacher?->id}}</td>
                     <td>{{$teacher?->name}}</td>
                     <td>{{$teacher?->surname}}</td>
-                    <td>{{count($teacher?->courses) ? $teacher?->courses[0]->name : '-'}}</td>
+                    <td class="justify-content-start">
+                        @if(count($teacher?->courses) !== 0)
+                            <div class="col row-cols-3">
+                                @foreach($teacher->courses as $course)
+                                        <span class="badge bg-success">{{$course->name}}</span>
+                                @endforeach
+                            </div>
+                        @else
+                            <span class="fw-bold text-info">No Courses Registered</span>
+                        @endif
+                    </td>
                     <td>
                         <div class="hstack gap-3">
                             <button class="btn btn-warning text-light">UPDATE</button>
